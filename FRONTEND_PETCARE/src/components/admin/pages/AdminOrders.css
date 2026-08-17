@@ -1,0 +1,172 @@
+/* Container Layout */
+.admin-orders {
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #f0f7ff 0%, #e0e7ff 100%);
+  min-height: 100vh;
+  flex: 1;
+  overflow-x: auto;
+}
+
+/*  FIX: Keep sidebar width constant */
+.admin-sidebar {
+  width: 260px;          /* fixed width */
+  min-width: 260px;      /* prevent shrinking */
+  max-width: 260px;      /* prevent expansion */
+  flex-shrink: 0;        /* ⭐ MOST IMPORTANT */
+}
+
+
+.pay-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pill {
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  border-radius: 14px;
+  font-weight: 700;
+  width: fit-content;
+}
+
+/* METHODS */
+.pill.method.cod {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.pill.method.online {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+/* PAYMENT STATUS */
+.pill.paystate.pending {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.pill.paystate.paid {
+  background: #dcfce7;
+  color: #166534;
+}
+
+
+/* Compact Header - Reduced Height */
+.compact-order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.header-info h2 { font-size: 1.4rem; font-weight: 800; color: #0f172a; margin: 0; }
+.header-info p { font-size: 0.8rem; color: #64748b; margin: 0; }
+
+.header-tools { display: flex; gap: 1.5rem; align-items: center; }
+
+/* Search Bar */
+.search-bar-wrapper { position: relative; }
+.search-bar-wrapper i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+.search-bar-wrapper input {
+  padding: 0.6rem 1rem 0.6rem 2.5rem;
+  width: 280px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  background: #f8fafc;
+}
+
+/* Filter Pills */
+.filter-pill-group {
+  display: flex;
+  background: #f1f5f9;
+  padding: 0.25rem;
+  border-radius: 8px;
+}
+.pill-btn {
+  padding: 0.4rem 1rem;
+  border: none;
+  background: transparent;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #64748b;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.pill-btn.active {
+  background: white;
+  color: #3b82f6;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* List Table */
+.list-wrapper {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.order-list-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-list-table th {
+  background: #f8fafc;
+  padding: 1.25rem 2rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.order-list-table td {
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.95rem;
+}
+
+.order-id { font-weight: 800; color: #1e293b; }
+.customer-email { font-weight: 600; color: #475569; }
+.order-amount { font-weight: 800; color: #0f172a; }
+
+/* Status Pills */
+.status-pill {
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.status-pill.paid { background: #fef3c7; color: #92400e; }
+.status-pill.shipped { background: #dbeafe; color: #1e40af; }
+.status-pill.delivered { background: #dcfce7; color: #15803d; }
+
+/* Dropdown styling */
+.status-dropdown {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1e293b;
+  cursor: pointer;
+}
+
+.text-right { text-align: right; }

@@ -1,0 +1,118 @@
+/* src/styles/vetList.css */
+
+.v-page-container {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #e0e7ff 0%, #f8fafc 100%);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.v-content {
+  flex: 1;
+  padding-bottom: 4rem;
+}
+
+/* --- CENTERED HEADER --- */
+.v-header {
+  text-align: center;
+  padding: 4rem 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.v-title {
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: #1e293b;
+  letter-spacing: -1.5px;
+  margin-bottom: 8px;
+}
+
+.v-subtitle {
+  font-size: 1.1rem;
+  color: #64748b;
+  font-weight: 500;
+  /* FORCE SINGLE LINE */
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+}
+
+/* --- SEARCH & DROPDOWN FILTER SECTION --- */
+.v-filter-section {
+  max-width: 1000px;
+  margin: 0 auto 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem; /* Spacing between search and dropdown */
+  padding: 0 2rem;
+}
+
+.v-search-input {
+  flex: 2;
+  max-width: 450px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+/* THE NEW DROPDOWN STYLE */
+.v-spec-dropdown {
+  flex: 1;
+  max-width: 220px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background-color: white;
+  color: #475569;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  appearance: none; /* Removes default arrow to add a custom one */
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2364748b%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 18px;
+}
+
+.v-search-input:focus, .v-spec-dropdown:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+/* --- GRID & CARDS --- */
+.v-grid-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.v-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem;
+}
+
+.v-card {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  transition: all 0.3s ease;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+}
+
+.v-card:hover {
+  transform: translateY(-8px);
+  border-color: #dbeafe;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+}

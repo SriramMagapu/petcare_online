@@ -1,0 +1,353 @@
+/* src/styles/auth.css */
+
+:root {
+  /* --- 1. THEME COLORS --- */
+  /* Updated variables to match your new theme (optional usage, but good for reference) */
+  --bg-gradient-start: #f0f9ff;
+  --bg-gradient-end: #bae6fd;
+
+  /* --- 2. BRANDING COLORS (Ice Blue) --- */
+  --brand-grad-start: #20ABED;
+  --brand-grad-end: #0284c7;
+
+  /* --- 3. UI ELEMENTS --- */
+  --card-radius: 20px;
+  --input-bg: #f8fafc;
+  --input-border: #d2d8e0;
+  --input-focus-border: #20ABED;
+  --text-dark: #1e293b;
+  --text-muted: #64748b;
+  --btn-color: #20ABED;
+  --btn-hover: #0284c7;
+}
+
+/* =========================================
+   1. PAGE BACKGROUND & LAYOUT
+   ========================================= */
+.auth-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  
+  /* --- COPIED: Ice Blue/Sky Blue Gradient --- */
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+  
+  position: relative;
+  overflow: hidden;
+  font-family: 'Poppins', 'Segoe UI', sans-serif; /* Added font consistency */
+}
+
+/* --- COPIED: Large Soft Glows (The "Ice" effect) --- */
+.auth-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 70%, rgba(37, 99, 235, 0.08) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0; /* Behind the card */
+  animation: pulseGlow 10s ease-in-out infinite alternate;
+}
+
+/* --- COPIED: LARGE & FEWER BUBBLES --- */
+.auth-page::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  /* Larger bubbles defined here (20px and 40px radius) */
+  background-image: 
+    radial-gradient(circle, rgba(255, 255, 255, 0.5) 20px, transparent 21px),
+    radial-gradient(circle, rgba(59, 130, 246, 0.15) 40px, transparent 41px);
+    
+  /* Much larger spacing (grid size) to reduce the number of bubbles */
+  background-size: 500px 500px, 700px 700px;
+  
+  background-position: 0 0, 100px 100px;
+  pointer-events: none;
+  z-index: 0; /* Behind the card */
+  animation: floatUp 30s linear infinite;
+}
+
+/* --- COPIED: ANIMATIONS --- */
+@keyframes pulseGlow {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes floatUp {
+  0% { background-position: 0 0, 100px 100px; }
+  100% { background-position: 0 -500px, 100px -600px; }
+}
+
+/* =========================================
+   2. MAIN CARD
+   ========================================= */
+.auth-card {
+  position: relative;
+  z-index: 10; /* Keeps card ABOVE the background bubbles */
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  min-height: 550px;
+  height: auto;
+  background: #fff;
+  border-radius: var(--card-radius);
+  /* Slightly tweaked shadow to match the lighter ice theme */
+  box-shadow: 0 20px 60px rgba(32, 171, 237, 0.15), 0 0 0 1px rgba(255,255,255,0.5); 
+  overflow: hidden;
+  backdrop-filter: blur(5px); /* Optional: Adds a tiny glass effect to edges */
+}
+
+/* =========================================
+   3. LEFT PANEL: BRANDING
+   ========================================= */
+.auth-branding {
+  flex: 1;
+  min-height: 100%;
+  background: linear-gradient(135deg, var(--brand-grad-start) 0%, var(--brand-grad-end) 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Watermark Paws */
+.auth-branding::before,
+.auth-branding::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23ffffff' d='M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3s-14.4-70.1 10.1-84.1s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5v1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3v-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.auth-branding::before { top: -50px; right: -80px; transform: rotate(20deg); }
+.auth-branding::after { bottom: -60px; left: -80px; transform: rotate(-15deg); }
+
+.branding-content {
+  position: relative;
+  z-index: 10;
+}
+
+.brand-header {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.auth-branding h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.brand-tagline {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  opacity: 0.95;
+  max-width: 90%;
+}
+
+/* =========================================
+   4. RIGHT PANEL: FORM
+   ========================================= */
+.auth-form-container {
+  flex: 1.2;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 20;
+  background: #fff;
+}
+
+.form-header h2 {
+  font-size: 1.8rem;
+  color: var(--text-dark);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.form-sub {
+  color: var(--text-muted);
+  margin-bottom: 30px;
+}
+
+/* Form Layouts */
+.input-group { margin-bottom: 20px; }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.full-width { grid-column: span 2; }
+
+/* =========================================
+   5. INPUT FIELDS (CLEAN & ROBUST)
+   ========================================= */
+.auth-form-container .form-control {
+  width: 100%;
+  height: 50px;
+  padding: 0 16px;
+  
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  background-color: var(--input-bg);
+  
+  border: 1.5px solid var(--input-border);
+  border-radius: 12px;
+  box-sizing: border-box;
+  
+  transition: all 0.2s ease;
+  caret-color: var(--text-dark);
+}
+
+.auth-form-container .form-control:focus {
+  outline: none;
+  background-color: #fff;
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 4px rgba(32, 171, 237, 0.2);
+}
+
+.auth-form-container .form-control::placeholder {
+  color: #94a3b8;
+  opacity: 1;
+}
+
+/* Chrome Autofill Fix */
+.auth-form-container input:-webkit-autofill,
+.auth-form-container input:-webkit-autofill:hover,
+.auth-form-container input:-webkit-autofill:focus,
+.auth-form-container input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--text-dark) !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--input-bg) inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* =========================================
+   6. RADIO BUTTONS & ACTIONS
+   ========================================= */
+.role-selection {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.role-radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.role-radio input {
+  accent-color: var(--btn-color);
+  transform: scale(1.2);
+}
+
+.btn-wrap { margin-top: 10px; }
+
+.primary-btn {
+  width: 100%;
+  height: 50px;
+  background-color: var(--btn-color);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 10px 20px rgba(32, 171, 237, 0.2);
+}
+
+.primary-btn:hover {
+  background-color: var(--btn-hover);
+  transform: translateY(-1px);
+}
+
+.primary-btn:active {
+  transform: translateY(0);
+}
+
+/* Messages */
+.message-space {
+  min-height: 24px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.error-msg { color: #ef4444; font-size: 0.9rem; font-weight: 500; }
+.info-msg { color: #10b981; font-size: 0.9rem; font-weight: 500; }
+
+.muted-footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.muted-footer a {
+  color: var(--btn-color);
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+/* =========================================
+   7. RESPONSIVE DESIGN
+   ========================================= */
+@media (max-width: 850px) {
+  .auth-card {
+    flex-direction: column;
+    min-height: auto;
+    height: auto;
+  }
+  
+  .auth-branding {
+    padding: 40px 30px;
+    text-align: center;
+    min-height: auto;
+  }
+  
+  .brand-header { justify-content: center; }
+  
+  .auth-branding h1 { font-size: 2.2rem; }
+  
+  .auth-form-container { padding: 30px 20px; }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .full-width { grid-column: span 1; }
+}

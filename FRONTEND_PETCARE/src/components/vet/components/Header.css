@@ -1,0 +1,141 @@
+/* Header.css - Unique prefix: vethd- */
+
+.vethd-header {
+  height: 70px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.vethd-header-left {
+  flex: 1;
+}
+
+.vethd-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.vethd-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 14px 6px 6px;
+  background: #f8fafc;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.vethd-user-info:hover {
+  background: #f1f5f9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.vethd-user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.vethd-user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.2;
+}
+
+.vethd-user-role {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+.vethd-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+.vethd-user-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.vethd-user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vethd-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.vethd-logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+.vethd-logout-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .vethd-header {
+    padding: 0 20px;
+  }
+  
+  .vethd-user-details {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .vethd-header {
+    height: 65px;
+    padding: 0 15px;
+  }
+  
+  .vethd-logout-btn span {
+    display: none;
+  }
+  
+  .vethd-logout-btn {
+    padding: 10px;
+  }
+}

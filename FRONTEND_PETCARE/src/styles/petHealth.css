@@ -1,0 +1,279 @@
+/* ============================================
+   HEALTH & VITALS – CLEAN PROFESSIONAL UI
+   ============================================ */
+
+.pet-health-section {
+  background: #f5f9ff; /* light sky blue */
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* HEADER */
+
+.health-header {
+  margin-bottom: 1.75rem;
+}
+
+.health-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+}
+
+.health-subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* ============================================
+   STATS CARDS
+   ============================================ */
+
+.health-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #eef4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-right: 6px; /* spacing fix */
+}
+
+.stat-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* ============================================
+   MAIN LAYOUT
+   ============================================ */
+
+.health-content {
+  display: grid;
+  grid-template-columns: 400px minmax(0, 1fr);
+  gap: 1.75rem;
+}
+
+
+/* ============================================
+   FORM CARD
+   ============================================ */
+
+.health-form-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.form-header {
+  margin-bottom: 1.25rem;
+}
+
+.form-header h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.form-header p {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* FORM ELEMENTS */
+
+.health-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  box-sizing: border-box;
+  font-size: 0.85rem;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+}
+
+.form-textarea {
+  resize: none;
+}
+
+/* SUBMIT BUTTON */
+
+.form-submit {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  width: 100%;
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form-submit:hover {
+  background: #4f46e5;
+}
+
+/* ============================================
+   CHART CONTAINER
+   ============================================ */
+
+.health-charts-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.5rem;
+  min-height: 420px;
+}
+
+/* CHART HEADER */
+
+.chart-header {
+  margin-bottom: 1rem;
+}
+
+.chart-header h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.chart-header p {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* EMPTY STATE */
+
+.chart-empty {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.chart-empty h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.chart-empty p {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* LOADING */
+
+.chart-loading {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .health-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .health-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

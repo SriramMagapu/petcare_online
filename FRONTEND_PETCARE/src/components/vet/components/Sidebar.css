@@ -1,0 +1,174 @@
+/* Sidebar.css - Unique prefix: vetsd- */
+
+.vetsd-sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.vetsd-sidebar-header {
+  padding: 30px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.vetsd-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: vetsd-slideIn 0.6s ease-out;
+}
+
+@keyframes vetsd-slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.vetsd-logo-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+  animation: vetsd-pawBounce 2s ease-in-out infinite;
+}
+
+@keyframes vetsd-pawBounce {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(5deg);
+  }
+}
+
+.vetsd-logo-icon:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+}
+
+.vetsd-logo-text {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.vetsd-sidebar-menu {
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vetsd-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  color: #94a3b8;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.vetsd-sidebar-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.vetsd-sidebar-item:hover {
+  background: rgba(102, 126, 234, 0.15);
+  color: #e2e8f0;
+  transform: translateX(4px);
+}
+
+.vetsd-sidebar-item:hover::before {
+  transform: scaleY(1);
+}
+
+.vetsd-sidebar-item.vetsd-active {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.vetsd-sidebar-item.vetsd-active::before {
+  transform: scaleY(1);
+}
+
+.vetsd-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease;
+}
+
+.vetsd-sidebar-item:hover .vetsd-item-icon {
+  transform: scale(1.15);
+}
+
+.vetsd-sidebar-item.vetsd-active .vetsd-item-icon {
+  color: #667eea;
+  filter: drop-shadow(0 0 8px rgba(102, 126, 234, 0.6));
+}
+
+.vetsd-item-label {
+  flex: 1;
+  white-space: nowrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .vetsd-sidebar {
+    width: 80px;
+  }
+  
+  .vetsd-logo-text {
+    display: none;
+  }
+  
+  .vetsd-item-label {
+    display: none;
+  }
+  
+  .vetsd-sidebar-item {
+    justify-content: center;
+    padding: 14px;
+  }
+}

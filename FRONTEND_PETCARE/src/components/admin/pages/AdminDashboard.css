@@ -1,0 +1,199 @@
+/* ===============================
+   ADMIN DASHBOARD (SAFE + POLISHED)
+   =============================== */
+
+.admin-dashboard {
+  --bg-dashboard: #f0f7ff;
+  --accent-blue: #3b82f6;
+  --accent-pink: #e11d48;
+  --accent-purple: #8b5cf6;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* ================= PAGE ================= */
+
+.admin-dashboard .dashboard-body {
+  padding: 2.5rem;
+  background: var(--bg-dashboard);
+  min-height: 100vh;
+  /* Ensure the entire stack of content stays left-aligned */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+}
+
+/* ================= HEADER ================= */
+
+.admin-dashboard .dashboard-intro {
+  margin-bottom: 2.5rem;
+  width: 100%;
+  text-align: left;
+}
+
+.admin-dashboard .page-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--text-dark);
+}
+
+.admin-dashboard .page-subtitle {
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+  font-size: 1rem;
+}
+
+/* ================= STATS (FIXED ALIGNMENT) ================= */
+
+.admin-dashboard .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+  margin-bottom: 3rem;
+  width: 100%;
+}
+
+.admin-dashboard .stat-card {
+  background: var(--white);
+  padding: 2.2rem 2.4rem;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  position: relative;
+  overflow: hidden;
+
+  /* ✅ FIX: Force children to align to the left start */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  text-align: left;
+
+  transition: all 0.25s ease;
+}
+
+/* Accent bar */
+.admin-dashboard .stat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+  width: 100%;
+}
+
+.admin-dashboard .stat-card:nth-child(1)::before { background: var(--accent-blue); }
+.admin-dashboard .stat-card:nth-child(2)::before { background: var(--accent-pink); }
+.admin-dashboard .stat-card:nth-child(3)::before { background: var(--accent-purple); }
+
+.admin-dashboard .stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+}
+
+.admin-dashboard .stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.admin-dashboard .stat-value {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--text-dark);
+  margin-top: 0.4rem;
+}
+
+/* ================= ACTION REQUIRED (REFINED SPACING) ================= */
+
+.admin-dashboard .action-section {
+  width: 100%;
+  text-align: left;
+}
+
+.admin-dashboard .section-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 1.6rem;
+  color: var(--text-dark);
+}
+
+.admin-dashboard .action-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* ✅ INCREASED GAP: Prevents visual clutter */
+  gap: 2.5rem; 
+  margin-bottom: 3.5rem;
+  width: 100%;
+}
+
+.admin-dashboard .action-card {
+  background: var(--white);
+  /* ✅ INCREASED PADDING: Better breathing room */
+  padding: 2.5rem 2.2rem; 
+  border-radius: 18px;
+  box-shadow: var(--card-shadow);
+
+  /* ✅ FIX: Force buttons and text to the left */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  text-align: left;
+  
+  gap: 1.2rem; 
+  min-height: 200px; 
+  transition: all 0.25s ease;
+}
+
+.admin-dashboard .action-card:hover {
+  transform: translateY(-4px);
+}
+
+.admin-dashboard .action-card h4 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.admin-dashboard .action-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.admin-dashboard .btn-primary {
+  margin-top: auto; 
+  /* ✅ FIX: Prevents button from stretching to full card width */
+  align-self: flex-start; 
+  
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-dashboard .btn-primary:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
+}
+
+/* ================= CHART ================= */
+
+.admin-dashboard .chart-section {
+  width: 100%;
+}
+
+.admin-dashboard .chart-container {
+  background: var(--white);
+  padding: 2.6rem 2rem 1.6rem;
+  border-radius: 20px;
+  box-shadow: var(--card-shadow);
+  width: 100%;
+}

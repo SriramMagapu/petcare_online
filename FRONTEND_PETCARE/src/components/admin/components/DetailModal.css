@@ -1,0 +1,176 @@
+/* ===============================================
+   MODAL STYLES - Modern & Reusable
+   =============================================== */
+:root {
+  --modal-backdrop-bg: rgba(30, 41, 59, 0.7);
+  --modal-card-bg: #ffffff;
+  --modal-header-text: #0f172a;
+  --modal-label-text: #94a3b8;
+  --modal-value-text: #334155;
+  --modal-border-light: #f1f5f9;
+  --modal-footer-bg: #f8fafc;
+  --pet-list-bg: #f8fafc;
+  --btn-secondary-bg: #e2e8f0;
+  --btn-secondary-text: #475569;
+  --btn-secondary-hover-bg: #cbd5e1;
+  --btn-primary-bg: #2563eb;
+  --btn-danger-bg: #dc2626;
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: var(--modal-backdrop-bg);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background-color: var(--modal-card-bg);
+  width: 90%;
+  max-width: 500px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Gradient sidebar accent */
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(180deg, #8b5cf6, #ec4899);
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(20px) scale(0.98); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+
+/* --- Modal Sections --- */
+.modal-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--modal-border-light);
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--modal-header-text);
+}
+
+.modal-body {
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--modal-label-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detail-value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--modal-value-text);
+}
+
+/* --- Pet List Specifics --- */
+.pet-list {
+  background-color: var(--pet-list-bg);
+  border: 1px solid var(--modal-border-light);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-top: 0.5rem;
+}
+
+.pet-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  color: var(--modal-value-text);
+  font-size: 0.95rem;
+  padding: 0.5rem 0;
+}
+
+.pet-item i {
+  color: var(--btn-primary-bg);
+}
+
+/* --- Status Pills --- */
+.status-pill {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.status-pill.approved { background-color: #dcfce7; color: #16a34a; }
+.status-pill.pending { background-color: #fef9c3; color: #ca8a04; }
+
+/* --- Footer & Actions --- */
+.modal-footer {
+  padding: 1rem 2rem;
+  background-color: var(--modal-footer-bg);
+  border-top: 1px solid var(--modal-border-light);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.btn {
+  padding: 0.65rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-secondary {
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+}
+.btn-secondary:hover { background-color: var(--btn-secondary-hover-bg); }
+
+.btn-primary { background-color: var(--btn-primary-bg); color: white; }
+.btn-primary:hover { filter: brightness(1.15); transform: translateY(-1px); }
+
+.btn-danger { background-color: var(--btn-danger-bg); color: white; }
+.btn-danger:hover { background-color: #b91c1c; transform: translateY(-1px); }
+
+/* Loading Spinner */
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

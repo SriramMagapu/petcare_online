@@ -1,0 +1,526 @@
+/* petMedicalHistory.css - Updated with unique prefix: pmh- */
+
+/* ================= CONTAINER ================= */
+.pet-medical-history {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
+}
+
+
+.btn-cancel {
+  padding: 0.4rem 0.9rem;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-cancel:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+
+
+
+/* ================= CONTROL BAR ================= */
+.history-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.filter-group {
+  display: flex;
+  gap: 0.5rem;
+  background: #f3f4f6;
+  padding: 0.25rem;
+  border-radius: 10px;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn.active {
+  background: #ffffff;
+  color: #2563eb;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.book-appointment-btn {
+  padding: 0.6rem 1.25rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.book-appointment-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+}
+
+.book-appointment-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ================= APPOINTMENTS LIST ================= */
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.medical-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #9ca3af;
+  font-size: 1rem;
+}
+
+/* ================= APPOINTMENT CARD ================= */
+.appt-card {
+  background: #ffffff;
+  border: 1px solid #f3f4f6;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.appt-card:hover {
+  border-color: #e5e7eb;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transform: translateY(-2px);
+}
+
+/* --- DATE BOX (Left) --- */
+.appt-date-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  height: 75px;
+  background: #f0f9ff;
+  border: 1px solid #e0f2fe;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+
+.date-month { 
+  font-size: 0.75rem; 
+  font-weight: 700; 
+  text-transform: uppercase; 
+  color: #3b82f6; 
+}
+
+.date-day { 
+  font-size: 1.75rem; 
+  font-weight: 700; 
+  color: #1e3a8a; 
+  line-height: 1; 
+}
+
+/* --- INFO (Middle) --- */
+.appt-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.appt-vet-name { 
+  font-size: 1.15rem; 
+  font-weight: 700; 
+  color: #111827; 
+}
+
+.appt-specialty { 
+  font-size: 0.9rem; 
+  color: #6b7280; 
+  font-weight: 500; 
+}
+
+.appt-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.appt-time {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #4b5563;
+  font-weight: 600;
+}
+
+/* --- RIGHT COLUMN (Status + Address) --- */
+.appt-right-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+  min-width: 220px;
+}
+
+.appt-status {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-pending { 
+  background: #fff7ed; 
+  color: #c2410c; 
+  border: 1px solid #ffedd5; 
+}
+
+.status-approved { 
+  background: #f0fdf4; 
+  color: #15803d; 
+  border: 1px solid #bbf7d0; 
+}
+
+.status-completed { 
+  background: #eff6ff; 
+  color: #1d4ed8;      
+  border: 1px solid #bfdbfe; 
+}
+
+
+.status-cancelled { 
+  background: #fef2f2; 
+  color: #b91c1c; 
+  border: 1px solid #fecaca; 
+}
+
+.status-rejected {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+/* --- ADDRESS BORDER BOX --- */
+.appt-onsite-border-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.75rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  color: #374151;
+  width: 100%;
+}
+
+.onsite-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.4;
+}
+
+.onsite-item i {
+  color: #6b7280;
+  margin-top: 2px;
+  font-size: 0.85rem;
+}
+
+/* --- BUTTONS --- */
+.btn-join-session {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  background: #eef2ff;
+  color: #4f46e5;
+  border: 1px solid #c7d2fe;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-join-session:hover {
+  background: #e0e7ff;
+  border-color: #a5b4fc;
+}
+
+.btn-download-report {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-download-report:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* ================= MODAL ================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+.booking-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: pmh-slideUp 0.3s ease-out;
+}
+
+@keyframes pmh-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-error-banner {
+  background: #fef2f2;
+  color: #991b1b;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  border: 1px solid #fecaca;
+}
+
+.booking-card label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.booking-card select,
+.booking-card input[type="date"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.booking-card select:focus,
+.booking-card input[type="date"]:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.booking-card select:disabled,
+.booking-card input[type="date"]:disabled {
+  background: #f9fafb;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.booking-card select.input-error {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.booking-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.booking-actions button {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.booking-actions button:first-child {
+  background: #2563eb;
+  color: white;
+}
+
+.booking-actions button:first-child:hover:not(:disabled) {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.booking-actions button:first-child:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.booking-actions button:last-child {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.booking-actions button:last-child:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .history-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    flex-wrap: wrap;
+  }
+
+  .book-appointment-btn {
+    justify-content: center;
+  }
+
+  .appt-card {
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    padding-top: 3.5rem;
+  }
+
+  .appt-right-col {
+    align-items: flex-start;
+    width: 100%;
+    min-width: unset;
+  }
+
+  .appt-status {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+
+  .appt-date-box {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: flex-start;
+    background: none;
+    border: none;
+    gap: 0.5rem;
+    padding: 0;
+  }
+
+  .date-day { 
+    font-size: 1.25rem; 
+  }
+
+  .booking-card {
+    padding: 1.5rem;
+  }
+}
+
+.reminders-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+.reminders-placeholder h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 0.75rem;
+  color: #111827;
+}
+
+.reminders-placeholder p {
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  max-width: 280px;
+}
+
+.placeholder-icon {
+  font-size: 2rem;
+  color: #9ca3af;
+}

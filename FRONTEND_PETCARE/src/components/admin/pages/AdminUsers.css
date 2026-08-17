@@ -1,0 +1,150 @@
+.admin-users-page {
+  padding: 1.5rem 2.5rem;
+  /* Fresh professional gradient background */
+  background: linear-gradient(135deg, #f0f7ff 0%, #e0e7ff 100%);
+  min-height: 100vh;
+}
+
+/* Compact Header - Attached to Top */
+.compact-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.compact-page-header h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.header-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Search and Filters */
+.search-wrapper {
+  position: relative;
+}
+
+.search-wrapper i {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+
+.search-input {
+  padding: 0.5rem 1rem 0.5rem 2.2rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  width: 240px;
+}
+
+.role-filters {
+  display: flex;
+  background: #f1f5f9;
+  padding: 0.2rem;
+  border-radius: 8px;
+}
+
+.filter-btn {
+  padding: 0.4rem 1rem;
+  border: none;
+  background: transparent;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.filter-btn.active {
+  background: white;
+  color: #3b82f6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Table Wrapper */
+.table-wrapper {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table th {
+  background: #f8fafc;
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.custom-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.user-name {
+  display: block;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.user-email {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/* Updated Role Badges */
+.role-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.role-badge.owner {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+/* Vet is now GREEN */
+.role-badge.vet {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.view-btn {
+  background: #f1f5f9;
+  color: #3b82f6;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.view-btn:hover {
+  background: #3b82f6;
+  color: white;
+}

@@ -1,0 +1,832 @@
+/* VetProfile.css - Unique prefix: vetprof- */
+
+/* ===================== WRAPPER WITH BUBBLES ===================== */
+.vetprof-wrapper {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated Bubbles */
+.vetprof-wrapper::before,
+.vetprof-wrapper::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  animation: vetprof-float 20s ease-in-out infinite;
+}
+
+.vetprof-wrapper::before {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.vetprof-wrapper::after {
+  width: 300px;
+  height: 300px;
+  bottom: -80px;
+  right: -80px;
+  animation-delay: 5s;
+}
+
+@keyframes vetprof-float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(30px, -30px) scale(1.1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-20px, -50px) scale(0.9);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(40px, -20px) scale(1.05);
+    opacity: 0.6;
+  }
+}
+
+/* Additional Bubble Elements */
+.vetprof-container::before,
+.vetprof-container::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.vetprof-container::before {
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: -50px;
+  animation: vetprof-bubble1 15s ease-in-out infinite;
+}
+
+.vetprof-container::after {
+  width: 150px;
+  height: 150px;
+  bottom: 20%;
+  right: -40px;
+  animation: vetprof-bubble2 18s ease-in-out infinite;
+}
+
+@keyframes vetprof-bubble1 {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
+  50% { transform: translateY(-40px) scale(1.2); opacity: 0.6; }
+}
+
+@keyframes vetprof-bubble2 {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+  50% { transform: translateY(-30px) scale(1.15); opacity: 0.5; }
+}
+
+.vetprof-container {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  gap: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===================== LOADING ===================== */
+.vetprof-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #ffffff;
+  gap: 16px;
+}
+
+.vetprof-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: vetprof-spin 0.8s linear infinite;
+}
+
+@keyframes vetprof-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===================== MAIN CARD ===================== */
+.vetprof-card {
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.vetprof-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+  z-index: 0;
+}
+
+/* ===================== AVATAR SECTION ===================== */
+.vetprof-avatar-section {
+  position: relative;
+  padding-top: 60px;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+
+.vetprof-avatar-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.vetprof-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid #ffffff;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  display: block;
+  transition: all 0.3s ease;
+}
+
+/* ===================== CAMERA OVERLAY ===================== */
+.vetprof-camera-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.vetprof-camera-overlay.vetprof-camera-visible {
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 1;
+}
+
+.vetprof-camera-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vetprof-camera-icon {
+  color: #ffffff;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+}
+
+.vetprof-camera-overlay.vetprof-camera-visible .vetprof-camera-icon {
+  transform: scale(1.1);
+}
+
+.vetprof-hidden-input {
+  display: none;
+}
+
+/* ===================== STATUS BADGE ===================== */
+.vetprof-status-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: vetprof-pulse 2s ease-in-out infinite;
+}
+
+@keyframes vetprof-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.vetprof-status-badge.vetprof-approved {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+}
+
+.vetprof-status-badge.vetprof-pending {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+}
+
+/* ===================== CONTENT ===================== */
+.vetprof-content {
+  padding: 24px 32px 40px;
+  text-align: center;
+}
+
+.vetprof-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0c4a6e;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.vetprof-clinic {
+  font-size: 15px;
+  color: #64748b;
+  margin: 0 0 6px 0;
+}
+
+.vetprof-spec {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0ea5e9;
+  margin: 0;
+}
+
+/* ===================== STATS SECTION ===================== */
+.vetprof-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin: 32px 0;
+  padding: 24px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 16px;
+  border: 1px solid #bae6fd;
+}
+
+.vetprof-stat-item {
+  flex: 1;
+  text-align: center;
+}
+
+.vetprof-stat-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0c4a6e;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.vetprof-stat-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.vetprof-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(180deg, transparent 0%, #bae6fd 50%, transparent 100%);
+}
+
+/* ===================== INFO GRID ===================== */
+.vetprof-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+  text-align: left;
+}
+
+.vetprof-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.vetprof-info-item:hover {
+  background: #f0f9ff;
+  border-color: #bae6fd;
+  transform: translateX(4px);
+}
+
+.vetprof-info-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+}
+
+.vetprof-info-content {
+  flex: 1;
+}
+
+.vetprof-info-label {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.vetprof-info-value {
+  font-size: 15px;
+  color: #1e293b;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ===================== EDIT BUTTON ===================== */
+.vetprof-edit-btn {
+  width: 100%;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+  margin-top: 8px;
+}
+
+.vetprof-edit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(14, 165, 233, 0.5);
+}
+
+/* ===================== EDIT MODE ===================== */
+.vetprof-edit-content {
+  padding: 32px;
+}
+
+.vetprof-edit-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0c4a6e;
+  margin: 0 0 24px 0;
+  text-align: center;
+}
+
+.vetprof-form-group {
+  margin-bottom: 20px;
+}
+
+.vetprof-form-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.vetprof-form-label svg {
+  color: #0ea5e9;
+}
+
+.vetprof-form-input,
+.vetprof-form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #1e293b;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  outline: none;
+  font-family: inherit;
+}
+
+.vetprof-form-input:focus,
+.vetprof-form-textarea:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+  background: #f0f9ff;
+}
+
+.vetprof-form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.vetprof-form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.vetprof-save-btn,
+.vetprof-cancel-btn {
+  flex: 1;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.vetprof-save-btn {
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+}
+
+.vetprof-save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(14, 165, 233, 0.5);
+}
+
+.vetprof-cancel-btn {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.vetprof-cancel-btn:hover {
+  background: #e2e8f0;
+}
+
+/* ===================== CERTIFICATE SECTION ===================== */
+.vetprof-cert-section {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 0;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Decorative Background Elements */
+.vetprof-cert-section::before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
+  top: -50px;
+  right: -50px;
+  pointer-events: none;
+}
+
+.vetprof-cert-section::after {
+  content: '';
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
+  bottom: -40px;
+  left: -40px;
+  pointer-events: none;
+}
+
+.vetprof-cert-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px 32px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+.vetprof-cert-header svg {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.vetprof-cert-header h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.vetprof-cert-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.vetprof-cert-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 16px;
+  border: 2px solid #bae6fd;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative Pattern */
+.vetprof-cert-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.vetprof-cert-icon {
+  font-size: 64px;
+  filter: drop-shadow(0 8px 16px rgba(14, 165, 233, 0.3));
+  animation: vetprof-certFloat 3s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes vetprof-certFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Glow effect behind icon */
+.vetprof-cert-icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: vetprof-glow 2s ease-in-out infinite;
+}
+
+@keyframes vetprof-glow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+.vetprof-cert-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.vetprof-cert-subtitle {
+  font-size: 14px;
+  color: #10b981;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.vetprof-cert-subtitle::before {
+  content: '✓';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.vetprof-cert-actions {
+  display: flex;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.vetprof-cert-view,
+.vetprof-cert-update {
+  flex: 1;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.vetprof-cert-view {
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.3);
+}
+
+.vetprof-cert-view:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(14, 165, 233, 0.4);
+}
+
+.vetprof-cert-update {
+  background: #f1f5f9;
+  color: #475569;
+  position: relative;
+}
+
+.vetprof-cert-update:hover {
+  background: #e2e8f0;
+  transform: translateY(-2px);
+}
+
+/* Certificate Upload (Empty State) */
+.vetprof-cert-upload {
+  text-align: center;
+  padding: 60px 32px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 16px;
+  border: 2px dashed #7dd3fc;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative circles for empty state */
+.vetprof-cert-upload::before {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
+  top: -30px;
+  right: -30px;
+  animation: vetprof-bubble1 15s ease-in-out infinite;
+}
+
+.vetprof-cert-upload::after {
+  content: '';
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.06) 0%, transparent 70%);
+  bottom: -20px;
+  left: -20px;
+  animation: vetprof-bubble2 18s ease-in-out infinite;
+}
+
+.vetprof-cert-empty-icon {
+  font-size: 72px;
+  margin-bottom: 20px;
+  opacity: 0.7;
+  filter: drop-shadow(0 4px 8px rgba(14, 165, 233, 0.2));
+  animation: vetprof-certFloat 3s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+}
+
+.vetprof-cert-empty-text {
+  font-size: 16px;
+  color: #475569;
+  margin-bottom: 24px;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+
+.vetprof-cert-upload-btn {
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+  position: relative;
+  z-index: 1;
+}
+
+.vetprof-cert-upload-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(14, 165, 233, 0.5);
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 1024px) {
+  .vetprof-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .vetprof-wrapper {
+    padding: 20px 15px;
+  }
+
+  .vetprof-content,
+  .vetprof-edit-content {
+    padding: 24px 20px 32px;
+  }
+
+  .vetprof-cert-section {
+    padding: 24px;
+  }
+
+  .vetprof-name {
+    font-size: 24px;
+  }
+
+  .vetprof-stats {
+    padding: 16px;
+  }
+
+  .vetprof-stat-value {
+    font-size: 20px;
+  }
+
+  .vetprof-stat-label {
+    font-size: 11px;
+  }
+
+  .vetprof-cert-actions {
+    flex-direction: column;
+  }
+}
