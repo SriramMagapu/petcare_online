@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import OwnerProfileDropdown from "../Owner_user/OwnerProfileDropdown";
+import OwnerProfileDropdown from "./OwnerProfileDropdown";
 import "../../styles/OwnerHeader.css";
 
 /**
