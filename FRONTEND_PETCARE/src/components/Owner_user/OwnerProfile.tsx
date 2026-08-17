@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OwnerHeader from "./OwnerHeader";
 import { apiGetOwnerProfile, type OwnerProfile } from "../../api";
-import "../../styles/ownerProfile.css";
+import "../../styles/OwnerProfile.css";
 
 const API_BASE =
   import.meta.env.VITE_API_BASE ||

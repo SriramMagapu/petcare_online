@@ -9,7 +9,7 @@ import {
   apiListVaccinations,
   type Pet,
 } from "../../api";
-import "../../styles/petList.css";
+import "../../styles/PetList.css";
 import { getImageUrl } from "../../utils/imageUrl";
 
 const API_BASE =
