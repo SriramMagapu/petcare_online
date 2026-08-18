@@ -10,7 +10,7 @@ import type {
 const API_BASE =
   (import.meta.env.VITE_API_BASE as string) ||
   (import.meta.env.VITE_API_URL as string) ||
-  "http://localhost:8080";
+  "https://petcare-backend-ig9v.onrender.com";
 
 // ------------------ MAIN CLIENT ------------------
 const client: AxiosInstance = axios.create({
