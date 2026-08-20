@@ -52,16 +52,24 @@ public class AuthController {
     @PostMapping("/send-otp")
     public ResponseEntity<?> sendOtp(@RequestBody EmailRequest request) {
 
+        if (request == null || request.getEmail() == null || request.getEmail().isBlank()) {
+            return ResponseEntity.status(400)
+                    .body(Map.of("message", "Email is required"));
+        }
+
         String email = request.getEmail().trim().toLowerCase();
 
         if (request.isLogin()) {
-            User user = userRepository.findByEmail(email)
-                    .orElseThrow(() ->
-                            new RuntimeException("User not found"));
+            Optional<User> userOpt = userRepository.findByEmail(email);
+            if (userOpt.isEmpty()) {
+                return ResponseEntity.status(404)
+                        .body(Map.of("message", "User not found. Please register first."));
+            }
 
-            if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
+            User user = userOpt.get();
+            if (request.getPassword() == null || !passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
                 return ResponseEntity.status(401)
-                        .body(Map.of("message", "Invalid credentials"));
+                        .body(Map.of("message", "Invalid email or password"));
             }
         }
 
@@ -73,18 +81,26 @@ public class AuthController {
     @PostMapping("/verify-otp")
     public ResponseEntity<?> verifyOtp(@RequestBody OtpVerifyRequest req) {
 
+        if (req == null || req.getEmail() == null || req.getOtp() == null) {
+            return ResponseEntity.status(400)
+                    .body(Map.of("message", "Email and OTP are required"));
+        }
+
         String email = req.getEmail().trim().toLowerCase();
 
         if (!otpService.validateOtp(email, req.getOtp())) {
             return ResponseEntity.status(401)
-                    .body(Map.of("message", "Invalid OTP"));
+                    .body(Map.of("message", "Invalid or expired OTP"));
         }
 
         otpService.evictOtp(email);
 
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() ->
-                        new RuntimeException("User not found"));
+        Optional<User> userOpt = userRepository.findByEmail(email);
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.status(404)
+                    .body(Map.of("message", "User not found"));
+        }
+        User user = userOpt.get();
 
         System.out.println("🧠 ROLE FROM DB = " + user.getRole());
 
