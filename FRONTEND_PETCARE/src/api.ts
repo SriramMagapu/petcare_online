@@ -15,7 +15,7 @@ const API_BASE =
 // ------------------ MAIN CLIENT ------------------
 const client: AxiosInstance = axios.create({
   baseURL: API_BASE,
-  timeout: 15000,
+  timeout: 65000, // 65s — Render free tier cold start can take up to 50s
 });
 
 // client.interceptors.request.use((config) => {

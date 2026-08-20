@@ -13,7 +13,9 @@ export default function Login(): JSX.Element {
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState<Step>("enterCredentials");
   const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState<"error" | "info" | "success">("error");
   const [loading, setLoading] = useState(false);
+  const [elapsed, setElapsed] = useState(0);
 
   const navigate = useNavigate();
 
@@ -30,6 +32,13 @@ export default function Login(): JSX.Element {
     if (e) e.preventDefault();
     setMessage("");
     setLoading(true);
+    setElapsed(0);
+
+    // Countdown ticker
+    const startTime = Date.now();
+    const timer = setInterval(() => {
+      setElapsed(Math.floor((Date.now() - startTime) / 1000));
+    }, 1000);
 
     try {
       const res = await client.post("/auth/send-otp", {
@@ -38,11 +47,20 @@ export default function Login(): JSX.Element {
         login: true,
       });
 
+      setMessageType("success");
       setMessage(res.data?.message || "OTP sent");
       setStep("verifyOtp");
     } catch (err: any) {
-      setMessage(err?.response?.data?.message || "Login failed");
+      const isTimeout = err?.code === "ECONNABORTED" || err?.message?.includes("timeout");
+      setMessageType("error");
+      setMessage(
+        isTimeout
+          ? "Server took too long to respond. It may have been sleeping. Please try again — it should be faster now."
+          : err?.response?.data?.message || "Login failed"
+      );
     } finally {
+      clearInterval(timer);
+      setElapsed(0);
       setLoading(false);
     }
   };
@@ -136,12 +154,20 @@ export default function Login(): JSX.Element {
               </div>
 
               <div className="message-space">
-                {message && <p className="error-msg">{message}</p>}
+                {message && (
+                  <p className={messageType === "error" ? "error-msg" : "info-msg"}>
+                    {message}
+                  </p>
+                )}
               </div>
 
               <div className="btn-wrap">
                 <button className="primary-btn" disabled={loading}>
-                  {loading ? "Sending..." : "Send OTP"}
+                  {loading
+                    ? elapsed > 5
+                      ? `⏳ Waking server... ${elapsed}s`
+                      : "Sending..."
+                    : "Send OTP"}
                 </button>
               </div>
             </form>
