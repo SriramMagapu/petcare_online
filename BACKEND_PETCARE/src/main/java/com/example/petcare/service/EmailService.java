@@ -10,8 +10,7 @@ import java.util.Map;
 
 /**
  * Email service using Resend HTTP API.
- * Route testing emails via Resend account owner email (2020aara@gmail.com)
- * so all test account OTPs are delivered cleanly without 403 errors.
+ * Sends emails directly to the recipient email address provided.
  */
 @Service
 public class EmailService {
@@ -23,8 +22,6 @@ public class EmailService {
 
     @Value("${resend.from.address:Smart Pet Care <onboarding@resend.dev>}")
     private String fromAddress;
-
-    private static final String OWNER_TEST_EMAIL = "2020aara@gmail.com";
 
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -53,22 +50,12 @@ public class EmailService {
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.setBearerAuth(resendApiKey);
 
-            // On Resend free testing mode (onboarding@resend.dev), Resend restricts delivery
-            // to the account owner email (2020aara@gmail.com).
-            // We route all test account emails to 2020aara@gmail.com and tag the intended target in subject/body!
             String targetEmail = (to != null) ? to.trim().toLowerCase() : "";
-            String actualRecipient = OWNER_TEST_EMAIL;
-            String resendSubject = subject;
-
-            if (!targetEmail.equalsIgnoreCase(OWNER_TEST_EMAIL) && !targetEmail.isEmpty()) {
-                resendSubject = "🔐 [For: " + targetEmail + "] " + subject;
-                htmlBody = "<div style='background:#fff3cd; padding:10px; border-radius:5px; margin-bottom:15px; color:#856404; font-family:sans-serif;'><b>Test Mode Notification:</b> This OTP was requested for account <b>" + targetEmail + "</b></div>" + htmlBody;
-            }
 
             Map<String, Object> payload = new java.util.HashMap<>();
             payload.put("from", fromAddress);
-            payload.put("to", List.of(actualRecipient));
-            payload.put("subject", resendSubject);
+            payload.put("to", List.of(targetEmail));
+            payload.put("subject", subject);
             payload.put("html", htmlBody);
 
             if (attachment != null && fileName != null) {
@@ -83,12 +70,12 @@ public class EmailService {
             ResponseEntity<String> response = restTemplate.postForEntity(RESEND_API_URL, request, String.class);
 
             if (response.getStatusCode().is2xxSuccessful()) {
-                System.out.println("📧 OTP Email for [" + targetEmail + "] delivered via Resend to " + actualRecipient);
+                System.out.println("📧 Email sent via Resend directly to: " + targetEmail);
             } else {
-                System.err.println("❌ Resend API error: " + response.getStatusCode() + " — " + response.getBody());
+                System.err.println("❌ Resend API error for " + targetEmail + ": " + response.getStatusCode() + " — " + response.getBody());
             }
         } catch (Exception e) {
-            System.err.println("❌ Failed to send email via Resend for " + to + ": " + e.getMessage());
+            System.err.println("❌ Failed to send email via Resend to " + to + ": " + e.getMessage());
             e.printStackTrace();
         }
     }
