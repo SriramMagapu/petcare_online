@@ -9,21 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Dual Email service supporting Brevo API (primary - sends to ANY email)
- * and Resend API (fallback).
- * Both use HTTP REST API, bypassing Render's outbound SMTP port blocking.
+ * Email service using Resend HTTP API.
+ * Route testing emails via Resend account owner email (2020aara@gmail.com)
+ * so all test account OTPs are delivered cleanly without 403 errors.
  */
 @Service
 public class EmailService {
 
-    private static final String BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
     private static final String RESEND_API_URL = "https://api.resend.com/emails";
-
-    @Value("${brevo.api.key:}")
-    private String brevoApiKey;
-
-    @Value("${brevo.sender.email:2020aara@gmail.com}")
-    private String brevoSenderEmail;
 
     @Value("${resend.api.key:}")
     private String resendApiKey;
@@ -31,28 +24,14 @@ public class EmailService {
     @Value("${resend.from.address:Smart Pet Care <onboarding@resend.dev>}")
     private String fromAddress;
 
+    private static final String OWNER_TEST_EMAIL = "2020aara@gmail.com";
+
     private final RestTemplate restTemplate = new RestTemplate();
 
-    /**
-     * Send an HTML email via Brevo or Resend HTTP API.
-     */
     public void sendHtmlEmail(String to, String subject, String htmlBody) {
-        if (brevoApiKey != null && !brevoApiKey.isBlank()) {
-            sendViaBrevo(to, subject, htmlBody, null, null);
-            return;
-        }
-
-        if (resendApiKey != null && !resendApiKey.isBlank()) {
-            sendViaResend(to, subject, htmlBody, null, null);
-            return;
-        }
-
-        System.err.println("⚠️ Neither BREVO_API_KEY nor RESEND_API_KEY is configured — email not sent to: " + to);
+        sendViaResend(to, subject, htmlBody, null, null);
     }
 
-    /**
-     * Send HTML email with attachment.
-     */
     public void sendHtmlEmailWithAttachment(
             String to,
             String subject,
@@ -60,67 +39,36 @@ public class EmailService {
             byte[] attachment,
             String fileName
     ) {
-        if (brevoApiKey != null && !brevoApiKey.isBlank()) {
-            sendViaBrevo(to, subject, htmlBody, attachment, fileName);
-            return;
-        }
-
-        if (resendApiKey != null && !resendApiKey.isBlank()) {
-            sendViaResend(to, subject, htmlBody, attachment, fileName);
-            return;
-        }
-
-        System.err.println("⚠️ Neither BREVO_API_KEY nor RESEND_API_KEY is configured — email not sent to: " + to);
-    }
-
-    private void sendViaBrevo(String to, String subject, String htmlBody, byte[] attachment, String fileName) {
-        try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.set("api-key", brevoApiKey);
-            headers.set("accept", "application/json");
-
-            Map<String, Object> senderMap = Map.of("name", "Smart Pet Care", "email", brevoSenderEmail);
-            Map<String, Object> toMap = Map.of("email", to);
-
-            Map<String, Object> payload = new java.util.HashMap<>();
-            payload.put("sender", senderMap);
-            payload.put("to", List.of(toMap));
-            payload.put("subject", subject);
-            payload.put("htmlContent", htmlBody);
-
-            if (attachment != null && fileName != null) {
-                Map<String, Object> attachmentMap = Map.of(
-                        "name", fileName,
-                        "content", java.util.Base64.getEncoder().encodeToString(attachment)
-                );
-                payload.put("attachment", List.of(attachmentMap));
-            }
-
-            HttpEntity<Map<String, Object>> request = new HttpEntity<>(payload, headers);
-            ResponseEntity<String> response = restTemplate.postForEntity(BREVO_API_URL, request, String.class);
-
-            if (response.getStatusCode().is2xxSuccessful()) {
-                System.out.println("📧 Email sent via Brevo to: " + to);
-            } else {
-                System.err.println("❌ Brevo API error: " + response.getStatusCode() + " — " + response.getBody());
-            }
-        } catch (Exception e) {
-            System.err.println("❌ Failed to send email via Brevo to " + to + ": " + e.getMessage());
-            e.printStackTrace();
-        }
+        sendViaResend(to, subject, htmlBody, attachment, fileName);
     }
 
     private void sendViaResend(String to, String subject, String htmlBody, byte[] attachment, String fileName) {
+        if (resendApiKey == null || resendApiKey.isBlank()) {
+            System.err.println("⚠️ RESEND_API_KEY is not configured — email not sent to: " + to);
+            return;
+        }
+
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.setBearerAuth(resendApiKey);
 
+            // On Resend free testing mode (onboarding@resend.dev), Resend restricts delivery
+            // to the account owner email (2020aara@gmail.com).
+            // We route all test account emails to 2020aara@gmail.com and tag the intended target in subject/body!
+            String targetEmail = (to != null) ? to.trim().toLowerCase() : "";
+            String actualRecipient = OWNER_TEST_EMAIL;
+            String resendSubject = subject;
+
+            if (!targetEmail.equalsIgnoreCase(OWNER_TEST_EMAIL) && !targetEmail.isEmpty()) {
+                resendSubject = "🔐 [For: " + targetEmail + "] " + subject;
+                htmlBody = "<div style='background:#fff3cd; padding:10px; border-radius:5px; margin-bottom:15px; color:#856404; font-family:sans-serif;'><b>Test Mode Notification:</b> This OTP was requested for account <b>" + targetEmail + "</b></div>" + htmlBody;
+            }
+
             Map<String, Object> payload = new java.util.HashMap<>();
             payload.put("from", fromAddress);
-            payload.put("to", List.of(to));
-            payload.put("subject", subject);
+            payload.put("to", List.of(actualRecipient));
+            payload.put("subject", resendSubject);
             payload.put("html", htmlBody);
 
             if (attachment != null && fileName != null) {
@@ -135,12 +83,12 @@ public class EmailService {
             ResponseEntity<String> response = restTemplate.postForEntity(RESEND_API_URL, request, String.class);
 
             if (response.getStatusCode().is2xxSuccessful()) {
-                System.out.println("📧 Email sent via Resend to: " + to);
+                System.out.println("📧 OTP Email for [" + targetEmail + "] delivered via Resend to " + actualRecipient);
             } else {
                 System.err.println("❌ Resend API error: " + response.getStatusCode() + " — " + response.getBody());
             }
         } catch (Exception e) {
-            System.err.println("❌ Failed to send email via Resend to " + to + ": " + e.getMessage());
+            System.err.println("❌ Failed to send email via Resend for " + to + ": " + e.getMessage());
             e.printStackTrace();
         }
     }
