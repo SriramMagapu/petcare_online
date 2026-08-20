@@ -41,6 +41,9 @@ public class SecurityConfig {
             	    /* ========== PREFLIGHT ========== */
             	    .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
+            	    /* ========== HEALTH CHECK (keep-alive) ========== */
+            	    .requestMatchers("/health").permitAll()
+
             	    /* ========== AUTH ========== */
             	    .requestMatchers("/auth/**", "/api/auth/**").permitAll()
 
