@@ -21,20 +21,20 @@ public class UserService {
     private final UserRepository userRepo;
     private final OwnerProfileRepository ownerRepo;
     private final VetProfileRepository vetRepo;
-    private final JavaMailSenderAdapter mailAdapter;
+    private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
     private final CloudinaryService cloudinaryService;
 
     public UserService(UserRepository userRepo,
             OwnerProfileRepository ownerRepo,
             VetProfileRepository vetRepo,
-            JavaMailSenderAdapter mailAdapter,
+            EmailService emailService,
             PasswordEncoder passwordEncoder,
             CloudinaryService cloudinaryService) {
         this.userRepo = userRepo;
         this.ownerRepo = ownerRepo;
         this.vetRepo = vetRepo;
-        this.mailAdapter = mailAdapter;
+        this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
         this.cloudinaryService = cloudinaryService;
     }
@@ -52,7 +52,7 @@ public class UserService {
     }
 
     public void sendWelcomeEmail(String to) {
-        mailAdapter.sendSimple(to, "Welcome to PetCare", "Thanks for creating an account in PetCare!");
+        emailService.sendHtmlEmail(to, "Welcome to PetCare", "<h2>Thanks for creating an account in PetCare!</h2>");
     }
 
     public String savePhotoToDisk(MultipartFile file) throws IOException {
